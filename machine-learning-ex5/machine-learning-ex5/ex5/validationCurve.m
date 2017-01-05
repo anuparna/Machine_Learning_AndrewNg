@@ -39,15 +39,16 @@ error_val = zeros(length(lambda_vec), 1);
 %
 %
 
-
-
-
-
-
-
-
-
-
+for iter=1:length(lambda_vec)
+    lambda=lambda_vec(iter);
+    [theta] = trainLinearReg(X, y, lambda);
+    hypothesis = X*(theta);
+    factor=1/(2*size(X,1));
+    error_train(iter)=factor*(sum((hypothesis-y).^2));
+    hypothesis = Xval*(theta);
+    factor=1/(2*size(Xval, 1));
+    error_val(iter)=factor*(sum((hypothesis-yval).^2));
+end
 % =========================================================================
 
 end

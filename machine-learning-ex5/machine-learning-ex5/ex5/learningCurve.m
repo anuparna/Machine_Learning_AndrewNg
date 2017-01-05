@@ -53,8 +53,18 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
-
-
+for iter=1:m
+    
+    X_train=X(1:iter,:);
+    y_train=y(1:iter,:);
+    [theta] = trainLinearReg(X_train, y_train, lambda);
+    hypothesis = X_train*(theta);
+    factor=1/(2*iter);
+    error_train(iter)=factor*(sum((hypothesis-y_train).^2));
+    hypothesis = Xval*(theta);
+    factor=1/(2*size(Xval, 1));
+    error_val(iter)=factor*(sum((hypothesis-yval).^2));
+    
 
 
 
